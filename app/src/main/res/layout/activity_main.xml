@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/webbox_background"
+    android:keepScreenOn="true">
+
+    <WebView
+        android:id="@+id/webView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:focusedByDefault="true"
+        android:layerType="hardware" />
+
+    <FrameLayout
+        android:id="@+id/fullscreenContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/loadingOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#CC0B0F14"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:indeterminate="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/loading_website"
+            android:textColor="@color/webbox_text_primary"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/errorOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/webbox_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="48dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/unable_to_load"
+            android:textColor="@color/webbox_text_primary"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/errorMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="@string/check_connection"
+            android:textColor="@color/webbox_text_secondary"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnRetry"
+                style="@style/WebBox.Button.Primary"
+                android:layout_width="200dp"
+                android:layout_marginEnd="16dp"
+                android:focusable="true"
+                android:nextFocusRight="@id/btnErrorSettings"
+                android:text="@string/retry" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnErrorSettings"
+                style="@style/WebBox.Button"
+                android:layout_width="200dp"
+                android:focusable="true"
+                android:nextFocusLeft="@id/btnRetry"
+                android:text="@string/settings" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/toastBanner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center_horizontal"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/bg_toast_banner"
+        android:paddingHorizontal="24dp"
+        android:paddingVertical="12dp"
+        android:textColor="@color/webbox_text_primary"
+        android:textSize="16sp"
+        android:visibility="gone" />
+</FrameLayout>

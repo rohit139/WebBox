@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/settingsScroll"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/webbox_background"
+    android:clipToPadding="false"
+    android:fillViewport="true"
+    android:padding="@dimen/settings_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:maxWidth="@dimen/settings_content_max_width"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/settings_title"
+            android:textAppearance="@style/WebBox.Title" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:text="@string/settings_hint"
+            android:textAppearance="@style/WebBox.Secondary" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/section_spacing"
+            android:text="@string/website_url"
+            android:textAppearance="@style/WebBox.Label" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/urlInputLayout"
+            style="@style/WebBox.EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:boxBackgroundColor="@color/webbox_surface"
+            app:hintEnabled="false">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/urlEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:hint="@string/url_hint"
+                android:imeOptions="actionDone"
+                android:inputType="textUri"
+                android:minHeight="56dp"
+                android:nextFocusDown="@id/btnTestWebsite"
+                android:nextFocusUp="@id/btnCancel"
+                android:singleLine="true"
+                android:textColor="@color/webbox_text_primary"
+                android:textSize="18sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/urlErrorText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="@color/webbox_error"
+            android:textSize="14sp"
+            android:visibility="gone" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTestWebsite"
+            style="@style/WebBox.Button"
+            android:layout_marginTop="16dp"
+            android:nextFocusUp="@id/urlEditText"
+            android:nextFocusDown="@id/rowFullscreen"
+            android:focusable="true"
+            android:text="@string/test_website" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/section_spacing"
+            android:background="@color/webbox_divider" />
+
+        <include
+            android:id="@+id/rowFullscreen"
+            layout="@layout/item_setting_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusUp="@id/btnTestWebsite"
+            android:nextFocusDown="@id/rowLandscape" />
+
+        <include
+            android:id="@+id/rowLandscape"
+            layout="@layout/item_setting_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusUp="@id/rowFullscreen"
+            android:nextFocusDown="@id/rowDpad" />
+
+        <include
+            android:id="@+id/rowDpad"
+            layout="@layout/item_setting_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusUp="@id/rowLandscape"
+            android:nextFocusDown="@id/rowBlockExternal" />
+
+        <include
+            android:id="@+id/rowBlockExternal"
+            layout="@layout/item_setting_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusUp="@id/rowDpad"
+            android:nextFocusDown="@id/rowBlockPopups" />
+
+        <include
+            android:id="@+id/rowBlockPopups"
+            layout="@layout/item_setting_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusUp="@id/rowBlockExternal"
+            android:nextFocusDown="@id/rowRememberLast" />
+
+        <include
+            android:id="@+id/rowRememberLast"
+            layout="@layout/item_setting_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusUp="@id/rowBlockPopups"
+            android:nextFocusDown="@id/btnSaveLoad" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginVertical="@dimen/section_spacing"
+            android:background="@color/webbox_divider" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSaveLoad"
+            style="@style/WebBox.Button.Primary"
+            android:layout_marginBottom="@dimen/button_spacing"
+            android:nextFocusUp="@id/rowRememberLast"
+            android:nextFocusDown="@id/btnReload"
+            android:text="@string/save_and_load" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReload"
+            style="@style/WebBox.Button"
+            android:layout_marginBottom="@dimen/button_spacing"
+            android:nextFocusUp="@id/btnSaveLoad"
+            android:nextFocusDown="@id/btnClearData"
+            android:text="@string/reload_website" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnClearData"
+            style="@style/WebBox.Button"
+            android:layout_marginBottom="@dimen/button_spacing"
+            android:nextFocusUp="@id/btnReload"
+            android:nextFocusDown="@id/btnDiagnostics"
+            android:text="@string/clear_website_data" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDiagnostics"
+            style="@style/WebBox.Button"
+            android:layout_marginBottom="@dimen/button_spacing"
+            android:nextFocusUp="@id/btnClearData"
+            android:nextFocusDown="@id/btnReset"
+            android:text="@string/open_diagnostics" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnReset"
+            style="@style/WebBox.Button"
+            android:layout_marginBottom="@dimen/button_spacing"
+            android:nextFocusUp="@id/btnDiagnostics"
+            android:nextFocusDown="@id/btnCancel"
+            android:text="@string/reset_to_default" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnCancel"
+            style="@style/WebBox.Button"
+            android:nextFocusUp="@id/btnReset"
+            android:nextFocusDown="@id/urlEditText"
+            android:text="@string/cancel" />
+    </LinearLayout>
+</ScrollView>

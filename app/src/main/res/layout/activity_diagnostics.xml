@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/webbox_background"
+    android:fillViewport="true"
+    android:padding="@dimen/settings_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/diagnostics_title"
+            android:textAppearance="@style/WebBox.Title" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_surface_card"
+            android:orientation="vertical"
+            android:padding="24dp">
+
+            <TextView
+                android:id="@+id/diagCurrentUrl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/WebBox.Label"
+                android:textIsSelectable="true" />
+
+            <TextView
+                android:id="@+id/diagWebViewVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/WebBox.Label" />
+
+            <TextView
+                android:id="@+id/diagAndroidVersion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/WebBox.Label" />
+
+            <TextView
+                android:id="@+id/diagDeviceModel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/WebBox.Label" />
+
+            <TextView
+                android:id="@+id/diagConnection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/WebBox.Label" />
+
+            <TextView
+                android:id="@+id/diagLastError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:textAppearance="@style/WebBox.Label" />
+        </LinearLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDiagBack"
+            style="@style/WebBox.Button.Primary"
+            android:layout_marginTop="32dp"
+            android:text="@string/back" />
+    </LinearLayout>
+</ScrollView>
