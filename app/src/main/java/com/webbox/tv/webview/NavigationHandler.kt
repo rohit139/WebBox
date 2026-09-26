@@ -67,7 +67,8 @@ class NavigationHandler(
 
     private fun isLikelyMediaCdn(url: String): Boolean {
         val host = UrlValidator.extractBaseHost(url) ?: return false
-        val mediaHints = listOf(
+        val lowerHost = host.lowercase(Locale.US)
+        val domainHints = listOf(
             "googlevideo.com",
             "gvt1.com",
             "ytimg.com",
@@ -77,22 +78,14 @@ class NavigationHandler(
             "akamaized.net",
             "akamaihd.net",
             "fastly.net",
-            "cloudflare",
+            "cloudflare.com",
             "themoviedb.org",
             "tmdb.org",
-            "cdn.",
-            "video.",
-            "media.",
-            "stream.",
-            "hls.",
-            "embed",
-            "m3u8",
             "vidsrc",
             "vidlink",
             "filemoon",
             "streamtape",
             "streamwish",
-            "dood",
             "mixdrop",
             "megacloud",
             "rabbitstream",
@@ -103,8 +96,11 @@ class NavigationHandler(
             "smashy",
             "hydrax"
         )
-        val lowerUrl = url.lowercase(Locale.US)
-        return mediaHints.any { host.contains(it) || lowerUrl.contains(it) }
+        if (domainHints.any { lowerHost == it || lowerHost.endsWith(".$it") || lowerHost.contains(it) }) return true
+
+        // Generic CDN / player host labels, e.g. cdn.example.com or embed.example.com
+        val labels = lowerHost.split('.')
+        return labels.any { it == "cdn" || it == "embed" || it == "hls" || it == "stream" }
     }
 
     private fun logNav(url: String, blocked: Boolean) {

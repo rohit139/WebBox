@@ -45,6 +45,25 @@ class NavigationPolicyTest {
     }
 
     @Test
+    fun playerEmbedHostAllowed() {
+        assertTrue(handler.shouldOverrideUrlLoading("https://vidsrc.to/embed/movie/1") is Decision.Allow)
+    }
+
+    @Test
+    fun adRedirectWithCdnInPathBlocked() {
+        assertTrue(
+            handler.shouldOverrideUrlLoading("https://adnetwork.example/track?ref=cdn.media") is Decision.Block
+        )
+    }
+
+    @Test
+    fun adRedirectWithEmbedInQueryBlocked() {
+        assertTrue(
+            handler.shouldOverrideUrlLoading("https://ads.example/redirect?embed=1") is Decision.Block
+        )
+    }
+
+    @Test
     fun nonWebSchemeBlocked() {
         assertTrue(handler.shouldOverrideUrlLoading("intent://example.com#Intent;end") is Decision.Block)
     }
