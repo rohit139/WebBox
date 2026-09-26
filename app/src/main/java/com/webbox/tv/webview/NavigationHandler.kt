@@ -1,9 +1,9 @@
 package com.webbox.tv.webview
 
-import android.net.Uri
 import android.util.Log
 import com.webbox.tv.BuildConfig
 import com.webbox.tv.util.UrlValidator
+import java.net.URI
 import java.util.Locale
 
 class NavigationHandler(
@@ -24,7 +24,7 @@ class NavigationHandler(
         if (url.isNullOrBlank()) return Decision.Block("Empty URL")
 
         val scheme = try {
-            Uri.parse(url).scheme?.lowercase(Locale.US)
+            URI.create(url ?: "").scheme?.lowercase(Locale.US)
         } catch (_: Exception) {
             null
         }
@@ -62,6 +62,8 @@ class NavigationHandler(
         logNav(url, blocked = true)
         return Decision.Block("External link blocked")
     }
+
+    fun shouldOpenPopup(allowPopups: Boolean): Boolean = allowPopups
 
     private fun isLikelyMediaCdn(url: String): Boolean {
         val host = UrlValidator.extractBaseHost(url) ?: return false

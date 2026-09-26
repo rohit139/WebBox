@@ -338,8 +338,8 @@ class WebViewController(
                 isUserGesture: Boolean,
                 resultMsg: android.os.Message?
             ): Boolean {
-                if (!allowPopups && !isUserGesture) {
-                    if (BuildConfig.DEBUG) Log.d(TAG, "Popup blocked (no user gesture)")
+                if (!navigationHandler.shouldOpenPopup(allowPopups)) {
+                    if (BuildConfig.DEBUG) Log.d(TAG, "Popup blocked (Block Popups is ON)")
                     return false
                 }
                 val newWebView = WebView(context)
